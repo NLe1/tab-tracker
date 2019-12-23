@@ -1,0 +1,27 @@
+{
+    "name": "server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon --watch src --exec npm run server",
+        "server": "node src/app.js",
+        "lint": "eslint **/*.js"
+    },
+    "keywords": [],
+    "author": "Nhan Le",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt-nodejs": "0.0.3",
+        "bluebird": "^3.7.2",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "joi": "^14.3.1",
+        "jsonwebtoken": "^8.5.1",
+        "morgan": "^1.9.1",
+        "sequelize": "^5.21.3",
+        "sqlite3": "^4.1.1",
+        "vuex-router-sync": "^5.0.0"
+    }
+}
