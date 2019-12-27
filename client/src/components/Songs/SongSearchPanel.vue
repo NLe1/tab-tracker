@@ -1,9 +1,6 @@
 <template>
   <panel title="Search">
-    <v-text-field
-      label="Search by song title, artist, album , or genre "
-      v-model="search"
-    ></v-text-field>
+    <v-text-field label="Search by song title, artist, album , or genre " v-model="search"></v-text-field>
   </panel>
 </template>
 
@@ -28,7 +25,7 @@ export default {
       }
 
       this.$router.push(route);
-    }, 400),
+    }, 600),
 
     "$route.query.search": {
       immediate: true,

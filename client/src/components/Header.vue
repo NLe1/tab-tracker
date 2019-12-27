@@ -2,7 +2,7 @@
   <div>
     <v-app-bar>
       <v-toolbar-title class="mr-4">
-        <router-link tag="span" class="home" light :to="{ name: 'home' }">Tab Tracker</router-link>
+        <router-link tag="span" class="home" light :to="{ name: 'songs' }">Tab Tracker</router-link>
       </v-toolbar-title>
 
       <v-toolbar-items>
@@ -26,7 +26,7 @@ export default {
       try {
         this.$store.dispatch("setToken", null);
         this.$store.dispatch("setUser", null);
-        this.$router.push({ name: "home" });
+        this.$router.push({ name: "songs" });
       } catch (error) {
         console.log(error);
       }

@@ -1,7 +1,17 @@
 <template>
   <div>
-    <v-layout column>
-      <v-flex xs6>
+    <v-layout>
+      <v-flex xs6 v-if="isUserLoggedIn">
+        <songs-bookmarks></songs-bookmarks>
+        <recently-viewed-song class="mt-2"></recently-viewed-song>
+      </v-flex>
+      <v-flex
+        :class="{
+          xs12: !isUserLoggedIn,
+          xs6: isUserLoggedIn
+        }"
+        class="ml-2"
+      >
         <song-search-panel></song-search-panel>
         <song-panel class="mt-2"></song-panel>
       </v-flex>
@@ -11,43 +21,35 @@
 
 <script>
 import SongService from "../../services/SongService";
+import SongHistoryService from "../../services/SongHistoryService";
 import SongPanel from "./SongPanel";
 import SongSearchPanel from "./SongSearchPanel";
+import SongsBookmarks from "./SongsBookmarks";
+import RecentlyViewedSong from "./RecentlyViewedSongs";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
       songs: null
     };
   },
+  computed: {
+    ...mapState(["isUserLoggedIn"])
+  },
   async mounted() {
-    const res = await SongService.index();
-    this.songs = res.data;
+    const songRes = await SongService.index();
+    this.songs = songRes.data;
+    if (this.isUserLoggedIn) {
+      this.history = (await SongHistoryService.index()).data;
+    }
   },
   components: {
     SongPanel,
-    SongSearchPanel
+    SongSearchPanel,
+    SongsBookmarks,
+    RecentlyViewedSong
   }
 };
 </script>
 
-<style lang="scss" scoped>
-.song {
-  padding: 20px;
-  height: 400px;
-  overflow: hidden;
-}
-.song-title {
-  font-size: 30px;
-}
-
-.song-artist {
-  font-size: 24px;
-}
-.song-genre {
-  .font-size: 18px;
-}
-.album-image {
-  width: 70%;
-  margin: 0 auto;
-}
-</style>
+<style scoped></style>

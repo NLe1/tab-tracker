@@ -4,21 +4,17 @@ const cors = require("cors");
 const morgan = require("morgan");
 const { sequelize } = require("./models");
 const config = require("./config/config");
-const app = express();
 
+const app = express();
 app.use(morgan("combined"));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 require("./routes")(app);
+require("./passport");
 
-app.get("/status", (req, res) => {
-  res.send({
-    message: "hello world"
-  });
-});
-
-sequelize.sync().then(() => {
+sequelize.sync({ force: false }).then(() => {
   app.listen(config.port);
-  console.log(`Server stared on port ${config.port}`);
+  console.log(`Server started on port ${config.port}`);
 });

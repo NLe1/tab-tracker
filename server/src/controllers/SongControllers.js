@@ -18,7 +18,7 @@ module.exports = {
           }
         });
       } else {
-        songs = await Song.findAll({ limit: 10 });
+        songs = await Song.findAll();
       }
       res.send(songs);
     } catch (error) {
